@@ -12,7 +12,7 @@ const RecentProjects = () => {
   return (
     <div className="py-20">
       <TextGenerateEffect
-        className="text-center text-[10px] md:text-4xl lg:text-4xl "
+        className="text-center text-[40px] md:text-4xl lg:text-4xl "
         words="A selection of recent projects"
       />
       <div className="flex flex-wrap items-center justify-center p-4 gap-16 mt-10">

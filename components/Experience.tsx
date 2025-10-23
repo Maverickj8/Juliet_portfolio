@@ -8,7 +8,7 @@ const Experience = () => {
   return (
     <div className="py-20 w-full">
       <TextGenerateEffect
-        className="text-center text-[10px] md:text-4xl lg:text-4xl "
+        className="text-center text-[40px] md:text-4xl lg:text-4xl "
         words="My work Experience"
       />
 

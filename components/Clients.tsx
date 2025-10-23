@@ -9,7 +9,7 @@ import { InfiniteMovingCards } from "./ui/InfiniteCards";
 const Clients = () => {
   return (
     <section id="testimonials" className="py-20">
-      <TextGenerateEffect className="text-center text-[10px] md:text-4xl lg:text-4xl " words="Kind words from satisfied clients"/>
+      <TextGenerateEffect className="text-center text-[40px] md:text-4xl lg:text-4xl " words="Kind words from satisfied clients"/>
 
       <div className="flex flex-col items-center max-lg:mt-10">
         <div
