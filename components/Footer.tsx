@@ -21,7 +21,7 @@ const Footer = () => {
 
       <div className="flex flex-col items-center">
         <TextGenerateEffect
-          className="text-center text-[10px] md:text-2xl lg:text-2xl"
+          className="text-center text-[40px] md:text-2xl lg:text-2xl"
           words="Ready to Take Your Digital Presence To The Next Level?"
         />
         <TextGenerateEffect

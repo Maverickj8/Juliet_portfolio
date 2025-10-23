@@ -223,7 +223,7 @@ export const socialMedia = [
   {
     id: 2,
     name: "2",
-    img: "/X.png",
+    img: "/x.png",
     link: 'https://x.com/MaverickAlbert5'
   },
   {
