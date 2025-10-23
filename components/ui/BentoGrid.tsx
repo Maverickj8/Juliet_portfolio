@@ -96,7 +96,8 @@ export const BentoGridItem = ({
               src={img}
               alt={img}
               className={cn(imgClassName, "object-cover object-center ")}
-              fill // ✅ Makes it responsive — works like position: absolute
+              width={100}
+                height={100} // ✅ Makes it responsive — works like position: absolute
               priority // ✅ Ensures it loads fast (optional)
             />
           )}
@@ -110,8 +111,8 @@ export const BentoGridItem = ({
             <Image
               src={spareImg}
               alt={spareImg}
-              width={500}
-                height={500}
+              width={100}
+                height={100}
               //   width={220}
               className="object-cover object-center w-full h-full"
             />

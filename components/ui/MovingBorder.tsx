@@ -10,39 +10,45 @@ import {
 import { useRef } from "react";
 import { cn } from "@/libs/utils";
 
-export function Button({
-  borderRadius = "1.75rem",
-  children,
-  as: Component = "button",
-  containerClassName,
-  borderClassName,
-  duration,
-  className,
-  ...otherProps
-}: {
+// --- START OF NEW, SIMPLIFIED BUTTON ---
+
+// 1. Define simple props. This accepts all standard <button> props
+//    plus our own custom ones.
+export interface ButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   borderRadius?: string;
   children: React.ReactNode;
-  as?: any;
   containerClassName?: string;
   borderClassName?: string;
   duration?: number;
-  className?: string;
-  [key: string]: any;
-}) {
+  // 'className' will now correctly apply to the *inner* div
+}
+
+// 2. Create the simplified Button component. It's just a <button>.
+export function Button({
+  borderRadius = "1.75rem",
+  children,
+  containerClassName,
+  borderClassName,
+  duration,
+  className, // This is for the inner div
+  style, // We destructure 'style' to merge it
+  ...otherProps // This contains onClick, type, disabled, etc.
+}: ButtonProps) {
   return (
-    <Component
+    <button
       className={cn(
-        // remove h-16 w-40, add  md:col-span-2
-        "bg-transparent relative text-xl p-[1px] overflow-hidden md:col-span-2 md:row-span-1",
+        "bg-transparent relative text-xl p-px overflow-hidden md:col-span-2 md:row-span-1",
         containerClassName
       )}
       style={{
-        borderRadius: borderRadius,
+        ...style, // Pass any user-provided style
+        borderRadius: borderRadius, // Add our own style
       }}
-      {...otherProps}
+      {...otherProps} // Pass all other <button> props
     >
       <div
-        className="absolute inset-0 rounde-[1.75rem]"
+        className="absolute inset-0 rounded-[1.75rem]"
         style={{ borderRadius: `calc(${borderRadius} * 0.96)` }}
       >
         <MovingBorder duration={duration} rx="30%" ry="30%">
@@ -57,8 +63,8 @@ export function Button({
 
       <div
         className={cn(
-          "relative bg-slate-900/[0.] border border-slate-800 backdrop-blur-xl text-white flex items-center justify-center w-full h-full text-sm antialiased",
-          className
+          "relative bg-slate-900/0 border border-slate-800 backdrop-blur-xl text-white flex items-center justify-center w-full h-full text-sm antialiased",
+          className // Apply the className prop to the inner div
         )}
         style={{
           borderRadius: `calc(${borderRadius} * 0.96)`,
@@ -66,10 +72,13 @@ export function Button({
       >
         {children}
       </div>
-    </Component>
+    </button>
   );
 }
 
+// --- END OF NEW, SIMPLIFIED BUTTON ---
+
+// This MovingBorder component is the same as before, with the fixes included.
 export const MovingBorder = ({
   children,
   duration = 2000,
@@ -81,9 +90,10 @@ export const MovingBorder = ({
   duration?: number;
   rx?: string;
   ry?: string;
-  [key: string]: any;
-}) => {
-  const pathRef = useRef<any>();
+} & React.SVGProps<SVGSVGElement>) => { // Fix for 'any' type
+  
+  // Fix for 'useRef' error (added 'null')
+  const pathRef = useRef<SVGRectElement>(null); 
   const progress = useMotionValue<number>(0);
 
   useAnimationFrame((time) => {

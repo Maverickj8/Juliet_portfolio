@@ -1,6 +1,7 @@
 "use client";
 import { useEffect } from "react";
-import { motion, stagger, useAnimate } from "motion/react";
+// Assuming 'motion/react' is correct for your setup.
+import { motion, stagger, useAnimate } from "motion/react"; 
 import { cn } from "@/libs/utils";
 
 export const TextGenerateEffect = ({
@@ -16,19 +17,33 @@ export const TextGenerateEffect = ({
 }) => {
   const [scope, animate] = useAnimate();
   const wordsArray = words.split(" ");
+  
   useEffect(() => {
+    // Check if the ref is available before running the animation
+    if (!scope.current) return;
+
     animate(
       "span",
       {
         opacity: 1,
-        filter: filter ? "blur(0px)" : "none",
+        // Using the 'filter' prop here
+        filter: filter ? "blur(0px)" : "none", 
       },
       {
-        duration: duration ? duration : 1,
+        // Using the 'duration' prop here
+        duration: duration || 1, 
         delay: stagger(0.2),
       }
     );
-  }, [scope.current]);
+  }, [
+    // FIX: Include 'scope' to resolve the ESLint warning since scope.current is used.
+    scope, 
+    // Include 'animate', 'duration', and 'filter' to satisfy the linter
+    // and ensure the effect re-runs if these props change.
+    animate, 
+    duration, 
+    filter,   
+  ]);
 
   const renderWords = () => {
     return (
@@ -37,7 +52,9 @@ export const TextGenerateEffect = ({
           return (
             <motion.span
               key={word + idx}
-              className={`${idx > 3 ? "text-purple-300" : 'dark:text-white text-black'} opacity-0`}
+              className={`${
+                idx > 3 ? "text-purple-300" : "dark:text-white text-black"
+              } opacity-0`}
               style={{
                 filter: filter ? "blur(10px)" : "none",
               }}
