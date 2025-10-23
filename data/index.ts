@@ -1,4 +1,15 @@
-export const navItems = [
+import React from "react"; // You may need this for the icon type
+
+// 1. ADD THIS PART: This exports the TYPE (the shape)
+export interface NavItem {
+  name: string;
+  link: string;
+  icon?: React.ReactElement; // Make icon optional
+}
+
+// 2. YOU ALREADY HAVE THIS: This exports the DATA (the array)
+export const navItems: NavItem[] = [ // Use the type here
+  { name: "Home", link: "/" },
   { name: "About", link: "#about" },
   { name: "Projects", link: "#projects" },
   { name: "Testimonials", link: "#testimonials" },
