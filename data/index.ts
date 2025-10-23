@@ -205,16 +205,19 @@ export const workExperience = [
 export const socialMedia = [
   {
     id: 1,
+    name: "1",
     img: "/git.svg",
     link: 'https://github.com/Maverickj8'
   },
   {
     id: 2,
+    name: "2",
     img: "/X.png",
     link: 'https://x.com/MaverickAlbert5'
   },
   {
     id: 3,
+    name: "3",
     img: "/link.svg",
     link: 'https://www.linkedin.com/in/chisom-eze-15213826b/'
   },
